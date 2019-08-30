@@ -4,6 +4,11 @@ import Home from './views/Home.vue'
 import Tables from './views/Tables.vue'
 import Records from './views/Records.vue'
 import Graphiql from './views/Graphiql.vue'
+import Deployment from './views/deployment/Index.vue'
+import FreeDeployment from './views/deployment/Free.vue'
+import APIKeys from './views/auth/APIKeys.vue'
+import Providers from './views/auth/Providers.vue'
+import Users from './views/auth/Users.vue'
 
 
 Vue.use(Router)
@@ -33,12 +38,29 @@ export default new Router({
       component: Graphiql
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
-    }
+      path: '/deployment',
+      name: 'deployment',
+      component: Deployment
+    },
+    {
+      path: '/deployment/free',
+      name: 'freeDeployment',
+      component: FreeDeployment
+    },
+    {
+      path: '/auth/apikeys',
+      name: 'apikeys',
+      component: APIKeys
+    },
+    {
+      path: '/auth/users',
+      name: 'users',
+      component: Users
+    },
+    {
+      path: '/auth/providers',
+      name: 'providers',
+      component: Providers
+    },
   ]
 })

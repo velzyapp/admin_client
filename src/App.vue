@@ -7,6 +7,7 @@
       fixed
       light
       app
+
     >
       <v-list>
 
@@ -42,6 +43,7 @@
     <v-app-bar
       :clipped-left="clipped"
       fixed
+      color="black"
       dark
       app
     >
@@ -58,6 +60,7 @@
     <v-footer
       :fixed="false"
       app
+      dark
     >
       <span>&copy; 2019</span>
     </v-footer>
@@ -67,13 +70,9 @@
 
 <script>
 import { mapState } from 'vuex';
-import HelloWorld from './components/HelloWorld';
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld,
-  },
   data: () => ({
     clipped: true,
     drawer: true,
@@ -82,11 +81,11 @@ export default {
       {route: "/", text: "Dashboard", icon: "home", name: "home"},
       {route: "/tables", text: "Tables", icon: "table-edit", name: "tables"},
       {route: "/query", text: "GraphQL", icon: "graphql", name: "graphql"},
-      {route: "/logs", text: "Logs", icon: "book-open", name: "logs"},
+      {route: "/auth/users", text: "Users", icon: "account-group", name: "users"},
+      {route: "/auth/apikeys", text: "API Keys", icon: "key-wireless", name: "apikeys"},
+      {route: "/auth/providers", text: "OAuth Settings", icon: "chemical-weapon", name: "providers"},
     ],
     miniVariant: false,
-    right: true,
-    rightDrawer: false,
     title: 'Velzy'
   }),
   created(){
