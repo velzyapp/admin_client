@@ -90,6 +90,11 @@ export default {
   }),
   created(){
     this.$store.dispatch("loadTables");
+  },
+  sockets: {
+    velzy_changeset: function(args) {
+      this.$store.dispatch("recordChanged", args)
+    }
   }
 };
 </script>

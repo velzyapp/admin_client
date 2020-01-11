@@ -78,10 +78,10 @@ export default new Vuex.Store({
       const stringified = JSON.stringify(doc);
       //such a hack but...
       const dequoted = stringified.replace(/\"([^(\")"]+)\":/g, "$1:");
-      return execute({ query: `mutation {saveDocument(collection:"${context.state.table.name}", body:${dequoted})}`}).then(res => {
+      return execute({ query: `mutation {save(collection:"${context.state.table.name}", body:${dequoted})}`}).then(res => {
         return {
           success: true,
-          data: res.data.saveDocument
+          data: res.data.save
         }
       }).catch(err => {
         return {
@@ -92,7 +92,7 @@ export default new Vuex.Store({
     },
     deleteDocument(context, id) {
       execute({query: `mutation {
-        deleteDocument(tableName: "${context.state.table.name}", id: ${id})
+        delete(tableName: "${context.state.table.name}", id: ${id})
       }`})
         .then(res => {
           context.commit("DELETE_RECORD", id)
@@ -111,18 +111,18 @@ export default new Vuex.Store({
       context.commit("RECORD_CHANGED", payload);
     },
     loadRecords(context, tableName) {
-      execute({query: `{tableRecords(tableName:"${tableName}")}`})
+      execute({query: `{topNRecords(tableName:"${tableName}")}`})
         .then(res => context.commit("SET_RECORDS", {
           tableName: tableName,
-          records: res.data.tableRecords
+          records: res.data.topNRecords.map(r => r.body)
         }));
     },
     runSearch(context, term) {
       execute({
-        query: `{ tableSearch (tableName: "${context.state.table.name}", term: "${term}")}`
+        query: `{ search (tableName: "${context.state.table.name}", term: "${term}")}`
       }).then(res => context.commit("SET_RECORDS", {
         tableName: context.state.table.name,
-        records: res.data.tableSearch
+        records: res.data.search
       }));
     }
   }
